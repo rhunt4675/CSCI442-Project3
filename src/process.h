@@ -1,8 +1,11 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
+#include <string>
 #include "thread.h"
 #include <vector>
+
+#define THREAD_TYPES 4
 
 // Forward Declaration for Thread Class
 class Thread;
@@ -15,20 +18,19 @@ public:
 	};
 
 	// Constructor
-	Process(int pid, Type type) {
-		this->pid = pid;
-		this->type = type;
-	}
+	Process(int pid, Type type);
 
 	// Returns pid
-	int get_pid() {
-		return pid;
-	}
+	int get_pid();
+
+	// Returns type
+	Type get_type();
+
+	// Returns type as a string
+	static std::string get_type_name(Type type);
 
 	// Push a thread into the thread vector
-	void pushThread(Thread* thread) {
-		threads.push_back(thread);
-	}
+	void pushThread(Thread* thread);
 
 private:
 	// PID
@@ -39,6 +41,9 @@ private:
 
 	// Associated Threads
 	std::vector<Thread*> threads;
+
+	// Corresponding Name Array
+	static std::string TypeArray[THREAD_TYPES];
 };
 
 #endif

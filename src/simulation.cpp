@@ -71,7 +71,7 @@ void Simulation::parseFile(std::string &file) {
 					thread->pushBurst(burst);
 				}
 			}
-			
+
 			// Add the thread to the parent's thread vector
 			process->pushThread(thread);
 

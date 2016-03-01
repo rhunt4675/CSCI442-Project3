@@ -18,14 +18,21 @@ int main(int argc, char** argv) {
 	// Create a logger instance
 	Logger* logger = new Logger(verboseOutput, perThreadOutput);
 
+	// Default to FCFS algorithm if none is specified
+	if (algorithm.empty())
+		algorithm = "FCFS";
+
 	// Generate a scheduler instance given a scheduling algorithm name
 	Scheduler* scheduler = getScheduler(algorithm);
 
 	// Invalid scheduler name
-	/*------------------------if (!scheduler) {
+	// Deliverable 1 Hack
+/*
+	if (!scheduler) {
 		std::cerr << "Invalid identifier for a scheduling algorithm: " << algorithm << std::endl;
 		exit(-1);
-	}*/
+	}
+*/
 
 	// Create simulation instance
 	Simulation mySimulation(scheduler, logger);
@@ -35,7 +42,7 @@ int main(int argc, char** argv) {
 
 	// Clean-up Allocated Memory
 	delete logger;
-	//----------------------------------------delete scheduler;
+	//------------------------delete scheduler;
 
 	// Exit
 	return 0;
@@ -83,7 +90,7 @@ void parseOptions(int argc, char** argv, bool* perThread, bool* verbose, std::st
 				 << "	-t, --per_thread			Output additional per-thread statistics for arrival time, service time, etc." << std::endl
 				 << "	-v, --verbose 				Output information about every state-changing event and scheduling decision." << std::endl
 				 << "	-a, --algorithm				The scheduling algorithm to use. One of FCFS, RR, PRIORITY, or CUSTOM." << std::endl
-				 << "	-h, --help 					Display a help message about these flags and exit." << std::endl;
+				 << "	-h, --help 				Display a help message about these flags and exit." << std::endl;
 			exit(0);
 
 		// Error Case
@@ -100,17 +107,17 @@ void parseOptions(int argc, char** argv, bool* perThread, bool* verbose, std::st
 
 	// Too many non-option arguments
 	if (optind + 1 < argc) {
-		std::cerr << "Too many non-option argument provided. Run 'simulation -h' for more information." << std::endl;
+		std::cerr << "Too many non-option argument provided. Run './simulator -h' for more information." << std::endl;
 		exit(-1);
 	}
 
 	// Not enough arguments
 	if (optind >= argc) {
-		std::cerr << "Not enough non-option arguments provided. Run 'simulation -h' for more information." << std::endl;
+		std::cerr << "Not enough non-option arguments provided. Run './simulator -h' for more information." << std::endl;
 		exit(-1);
 	}
 
-	// Get filename
+	// Corrent number of arguments -> Get filename
 	*simFile = std::string(argv[optind]);
 }
 

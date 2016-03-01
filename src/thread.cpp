@@ -1,5 +1,22 @@
 #include "thread.h"
 
+// Out-of-class Static Initializer
+std::string Thread::StateArray[] = {
+	"NEW", "READY", "RUNNING", "BLOCKED", "EXIT"
+};
+
+// Paramterized Constructor
+Thread::Thread(int id, Process* parent, unsigned int arrival_time) {
+	this->id = id;
+	this->process = parent;
+	this->arrival_time = arrival_time;
+}
+
+// Returns id
+int Thread::get_id() {
+	return id;
+}
+
 void Thread::set_ready(unsigned int time) {
 	// Update thread state
 	previous_state = current_state;
@@ -48,7 +65,7 @@ void Thread::set_blocked(unsigned int time) {
 void Thread::set_finished(unsigned int time) {
 	// Assert previously running
 	assert(current_state == State::RUNNING);
-	
+
 	// Update thread state
 	previous_state = current_state;
 	current_state = State::EXIT;
@@ -104,4 +121,9 @@ Thread::State Thread::get_current_state() {
 // get_previous_state returns the previous state
 Thread::State Thread::get_previous_state() {
 	return previous_state;
+}
+
+// get_state_name is a static member that returns the name given a particular state
+std::string Thread::get_state_name(Thread::State state) {
+	return StateArray[state];
 }

@@ -6,6 +6,8 @@
 #include <queue>
 #include <cassert>
 
+#define NUM_STATES 5
+
 // Forward Declaration for Process class
 class Process;
 
@@ -17,16 +19,10 @@ public:
 	};
 
 	// Constructor
-	Thread(int id, Process* parent, unsigned int arrival_time) {
-		this->id = id;
-		this->process = parent;
-		this->arrival_time = arrival_time;
-	}
+	Thread(int id, Process* parent, unsigned int arrival_time);
 
 	// Returns id
-	int get_id() {
-		return id;
-	}
+	int get_id();
 
 	// Returns response time
 	unsigned int response_time();
@@ -39,6 +35,9 @@ public:
 
 	// Returns current state
 	State get_current_state();
+
+	// Returns a state name
+	static std::string get_state_name(State state);
 
 	// Sets a thread to ready
 	void set_ready(unsigned int time);
@@ -91,6 +90,9 @@ private:
 
 	// Time of last state change
 	 int last_state_change = -1;
+
+    // Corresponding Name Array for States
+    static std::string StateArray[NUM_STATES];
 };
 
 #endif
