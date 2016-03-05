@@ -1,4 +1,5 @@
 #include "simulation.h"
+#include "fcfsscheduler.h"
 #include <getopt.h>
 #include <string> 
 #include <iostream>
@@ -26,13 +27,10 @@ int main(int argc, char** argv) {
 	Scheduler* scheduler = getScheduler(algorithm);
 
 	// Invalid scheduler name
-	// Deliverable 1 Hack
-/*
 	if (!scheduler) {
 		std::cerr << "Invalid identifier for a scheduling algorithm: " << algorithm << std::endl;
 		exit(-1);
 	}
-*/
 
 	// Create simulation instance
 	Simulation mySimulation(scheduler, logger);
@@ -123,23 +121,23 @@ void parseOptions(int argc, char** argv, bool* perThread, bool* verbose, std::st
 
 // getScheduler returns an instance of a scheduler given the name of the algorithm, or NULL if the algorithm doesn't exist
 Scheduler* getScheduler(std::string &algorithm) {
-	/*	// First Come, First Serve Scheduler
+	// First Come, First Serve Scheduler
 	if (algorithm == "FCFS")
 		return new FCFSScheduler();
 
 	// Round Robin Scheduler
 	else if (algorithm == "RR")
-		return new RRScheduler();
+		return NULL;
 
 	// Priority Scheduler
 	else if (algorithm == "PRIORITY")
-		return new PriorityScheduler();
+		return  NULL;
 
 	// Custom Scheduler
 	else if (algorithm == "CUSTOM")
-		return new CustomScheduler();
+		return NULL;
 
 	// Invalid Nmme -- Return NULL
-	else */
+	else 
 		return NULL;
 }

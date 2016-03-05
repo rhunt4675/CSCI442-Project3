@@ -23,6 +23,10 @@ DEPS = $(SRCS:src/%.cpp=bin/%.d)
 $(NAME): $(OBJS)
 	$(CXX) $(CPP_FLAGS) $^ -o $(NAME)
 
+# Debug target, build with debug options
+debug: $(OBJS)
+	$(CXX) $(CPP_FLAGS) $^ -o $(NAME) -g
+
 # Build and run the program.
 run: $(NAME)
 	./$(NAME) example_simulation

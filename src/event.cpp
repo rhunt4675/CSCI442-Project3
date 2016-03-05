@@ -7,21 +7,33 @@ std::string Event::TypeArray[] = {
 };
 
 // Parameterized Constructor
-Event::Event(Type type, int time, Thread* thread, Decision* decision) {
+Event::Event(Type type, unsigned int time, Thread* thread, Decision* decision) {
 	this->type = type;
 	this->time = time;
 	this->thread = thread;
 	this->decision = decision;
 }
 
+// Deconstructor
+Event::~Event() {
+	// If a decision is attached to the event, release it
+	if (decision)
+		delete decision;
+}
+
 // Returns time of event
-int Event::get_time() const {
+unsigned int Event::get_time() const {
 	return time;
 }
 
 // Returns type of event
 Event::Type Event::get_type() const {
 	return type;
+}
+
+// Returns a pointer to the Decision
+const Decision* Event::get_decision() const {
+	return decision;
 }
 
 // Returns name of a given event

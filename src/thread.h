@@ -24,17 +24,23 @@ public:
 	// Returns id
 	int get_id();
 
+	// Returns arrival time
+	unsigned int get_arrival_time();
+
+	// Returns CPU time
+	unsigned int get_service_time();
+
+	// Returns IO time
+	unsigned int get_io_time();
+
+	// Returns end time
+	unsigned int get_end_time();
+
 	// Returns response time
-	unsigned int response_time();
+	unsigned int get_response_time();
 
 	// Returns turnaround time
-	unsigned int turnaround_time();
-
-	// Returns previous state
-	State get_previous_state();
-
-	// Returns current state
-	State get_current_state();
+	unsigned int get_turnaround_time();
 
 	// Returns a state name
 	static std::string get_state_name(State state);
@@ -42,20 +48,17 @@ public:
 	// Sets a thread to ready
 	void set_ready(unsigned int time);
 
-	// Sets a thread to running
-	void set_running(unsigned int time);
+	// Sets a thread to running, returns cpu burst length
+	unsigned int set_running(unsigned int time);
 
-	// Sets a thread to blocked
-	void set_blocked(unsigned int time);
+	// Sets a thread to blocked, returns io burst length (or -1 if done)
+	unsigned int set_blocked(unsigned int time);
 
 	// Sets a thread to finished
 	void set_finished(unsigned int time);
 
 	// Push a burst onto the burst queue
 	void pushBurst(Burst* burst);
-
-	// Pop a burst off the burst queue
-	Burst* popBurst();
 
 	// Parent process of thread
 	Process* process;
@@ -93,6 +96,9 @@ private:
 
     // Corresponding Name Array for States
     static std::string StateArray[NUM_STATES];
+
+    // Updates the time counters (service_time and io_time) and managaes Burst queue
+    void updateCounters(unsigned int time);
 };
 
 #endif

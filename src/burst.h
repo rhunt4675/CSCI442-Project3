@@ -14,6 +14,18 @@ public:
 		this->length = length;
 	}
 
+	unsigned int get_length() {
+		return length;
+	}
+
+	void decrement_length(int amount) {
+		length -= amount;
+	}
+
+	Type get_type() {
+		return type;
+	}
+
 private:
 	// Type of Burst
 	Type type;

@@ -32,6 +32,9 @@ public:
 	// Push a thread into the thread vector
 	void pushThread(Thread* thread);
 
+	// Returns a const iterator to the thread vector
+	const std::vector<Thread*>& getThreads();
+
 private:
 	// PID
 	int pid;

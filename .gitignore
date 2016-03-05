@@ -1,4 +1,4 @@
 simulator
 *.dSYM
 bin/
-example.txt
+example_simulation
