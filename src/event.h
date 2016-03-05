@@ -11,17 +11,23 @@ public:
 	// Event Type Enumeration
 	enum Type {
 		THREAD_ARRIVED, THREAD_DISPATCH_COMPLETED, PROCESS_DISPATCH_COMPLETED, CPU_BURST_COMPLETED,
-		IO_BURST_COMPLETED, THREAD_COMPLETED, THREAD_PREEMEPTED, DISPATCHER_INVOKED
+		IO_BURST_COMPLETED, THREAD_COMPLETED, THREAD_PREEMPTED, DISPATCHER_INVOKED
 	};
 
 	// Constructor
-	Event(Type type, int time, Thread* thread, Decision* decision);
+	Event(Type type, unsigned int time, Thread* thread, Decision* decision);
+
+	// Destructor
+	~Event();
 
 	// Returns time of event
-	int get_time() const;
+	unsigned int get_time() const;
 
 	// Returns type of event
 	Type get_type() const;
+
+	// Returns a pointer to the decision
+	const Decision* get_decision() const;
 
 	// Returns name of a given event
 	static std::string get_type_name(Type type);
@@ -34,7 +40,7 @@ private:
 	Type type;
 
 	// Time at which event occurs
-	int time;
+	unsigned int time;
 
 	// Associated scheduling decision (if applicable)
 	const Decision* decision;

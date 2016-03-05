@@ -30,3 +30,8 @@ std::string Process::get_type_name(Type type) {
 void Process::pushThread(Thread *thread) {
 	threads.push_back(thread);
 }
+
+// Returns a const iterator to the thread vector
+const std::vector<Thread*>& Process::getThreads() {
+	return threads;
+}
