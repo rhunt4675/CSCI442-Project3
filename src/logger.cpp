@@ -1,8 +1,5 @@
 #include "logger.h"
 
-// Flag to determine if banner should be printed or not
-bool banner_flag = true;
-
 // If verbose is true, prints a state-transition message
 void Logger::print_state_transition(const Event* event, Thread::State before_state, Thread::State after_state) {
 	if (verbose) {
@@ -26,9 +23,6 @@ void Logger::print_dispatch_invoked_message(const Event* event, Thread *thread, 
 // if per_thread is true, prints information about a process and its threads
 void Logger::print_process_details(Process* process) const {
 	if (per_thread) {
-		// Print banner if this the first time print_process_details has been called
-		if (banner_flag) printProcessBanner();
-
 		std::cout << "Process " << process->get_pid() << " [" << Process::get_type_name(process->get_type()) << "]:" << std::endl;
 
 		// Get a const reference to the process' child threads
@@ -44,7 +38,7 @@ void Logger::print_process_details(Process* process) const {
 
 // Prints overall simulation statistics
 void Logger::print_statistics(SystemStats stats) const {
-	printSimulationBanner();
+	std::cout << "SIMULATION COMPLETED!" << std::endl << std::endl;
 
 	// Iterate through each type of thread (SYSTEM, INTERACTIVE, NORMAL, BATCH) and print statistics
 	for (int i = 0; i < 4; i++) {
@@ -62,15 +56,4 @@ void Logger::print_statistics(SystemStats stats) const {
 
 			  << "CPU Utilization:" << "\t\t" << std::right << std::setw(5) << stats.utilization << "%" << std::endl
 			  << "CPU efficiency:" << "\t\t\t" << std::right << std::setw(5) << stats.efficiency << "%" << std::endl;
-}
-
-// Prints per-process statistics banner
-void Logger::printProcessBanner() const {
-	std::cout << "======= Per-Process Statistics =======" << std::endl << std::endl;
-	banner_flag = false;
-}
-
-// Prints simulation complete banner
-void Logger::printSimulationBanner() const {
-	std::cout << "======= Simulation Complete!!! =======" << std::endl << std::endl;
 }

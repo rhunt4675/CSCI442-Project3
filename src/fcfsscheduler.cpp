@@ -10,8 +10,13 @@ Decision* FCFSScheduler::get_next_thread(const Event* event) {
 		threads.pop();
 	}
 
+	// Describe reason for scheduling decision
+	char buffer[100];
+	sprintf(buffer, "Selected from %u threads; will run to completion of burst", (unsigned int) threads.size() + 1);
+	std::string reason = std::string(buffer);
+
 	// Instantiate a Decision object to pass back to the Simulation
-	Decision *decision = new Decision(nextThread, -1, "(reason)");
+	Decision *decision = new Decision(nextThread, -1, reason);
 	return decision;
 }
 
