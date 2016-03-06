@@ -1,5 +1,6 @@
 #include "simulation.h"
 #include "fcfsscheduler.h"
+#include "rrscheduler.h"
 #include <getopt.h>
 #include <string> 
 #include <iostream>
@@ -127,7 +128,7 @@ Scheduler* getScheduler(std::string &algorithm) {
 
 	// Round Robin Scheduler
 	else if (algorithm == "RR")
-		return NULL;
+		return new RRScheduler();
 
 	// Priority Scheduler
 	else if (algorithm == "PRIORITY")

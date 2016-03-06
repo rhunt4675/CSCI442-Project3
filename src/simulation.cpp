@@ -124,6 +124,10 @@ void Simulation::handle_thread_preempted(const Event *event) {
 	previousThread = currentThread;
 	currentThread = NULL;
 
+	// If the processor is idle, invoke the scheduler right now
+	if (!currentThread)
+		events.push(new Event(Event::Type::DISPATCHER_INVOKED, event->get_time(), NULL, NULL));
+
 	// Print a state transition, if so requested by the user
 	logger->print_state_transition(event, Thread::State::RUNNING, Thread::State::READY);
 }

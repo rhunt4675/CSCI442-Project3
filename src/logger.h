@@ -32,12 +32,6 @@ private:
 
 	// Determines whether or not to print per-process statistics
 	bool per_thread;
-
-	// Prints per-process statistics banner
-	void printProcessBanner() const;
-
-	// Prints simulation complete banner
-	void printSimulationBanner() const;
 };
 
 #endif

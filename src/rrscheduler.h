@@ -1,10 +1,12 @@
-#ifndef FCFSSCHEDULER_H
-#define FCFSSCHEDULER_H
+#ifndef RRSCHEDULER_H
+#define RRSCHEDULER_H
 #include "scheduler.h"
 #include <queue>
 
-// FCFSScheduler implements the first-come-first-served scheduler described in the textbook
-class FCFSScheduler : public Scheduler {
+const static int RR_PREEMPTION = 3;
+
+// RRScheduler implements the round-robin scheduler described in the textbook
+class RRScheduler : public Scheduler {
 
 public:
 	// Returns next thread (or null if none left) that should be executed
