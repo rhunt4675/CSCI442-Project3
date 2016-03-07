@@ -1,6 +1,7 @@
 #include "simulation.h"
 #include "fcfsscheduler.h"
 #include "rrscheduler.h"
+#include "priorityscheduler.h"
 #include <getopt.h>
 #include <string> 
 #include <iostream>
@@ -132,7 +133,7 @@ Scheduler* getScheduler(std::string &algorithm) {
 
 	// Priority Scheduler
 	else if (algorithm == "PRIORITY")
-		return  NULL;
+		return  new PriorityScheduler();
 
 	// Custom Scheduler
 	else if (algorithm == "CUSTOM")
