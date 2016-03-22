@@ -1,5 +1,8 @@
 #include "simulation.h"
 #include "fcfsscheduler.h"
+#include "rrscheduler.h"
+#include "priorityscheduler.h"
+#include "customscheduler.h"
 #include <getopt.h>
 #include <string> 
 #include <iostream>
@@ -40,7 +43,7 @@ int main(int argc, char** argv) {
 
 	// Clean-up Allocated Memory
 	delete logger;
-	//------------------------delete scheduler;
+	delete scheduler;
 
 	// Exit
 	return 0;
@@ -84,7 +87,7 @@ void parseOptions(int argc, char** argv, bool* perThread, bool* verbose, std::st
 		// Print Help
 		case 'h':
 			std::cout << "Simulator v1.0 -- by Ryan Hunt" << std::endl << std::endl
-				 << "Usage: ./simulator [flags] simulation_file.txt" << std::endl << std::endl
+				 << "Usage: ./simulator [flags] [simulation_file]" << std::endl << std::endl
 				 << "	-t, --per_thread			Output additional per-thread statistics for arrival time, service time, etc." << std::endl
 				 << "	-v, --verbose 				Output information about every state-changing event and scheduling decision." << std::endl
 				 << "	-a, --algorithm				The scheduling algorithm to use. One of FCFS, RR, PRIORITY, or CUSTOM." << std::endl
@@ -127,15 +130,15 @@ Scheduler* getScheduler(std::string &algorithm) {
 
 	// Round Robin Scheduler
 	else if (algorithm == "RR")
-		return NULL;
+		return new RRScheduler();
 
 	// Priority Scheduler
 	else if (algorithm == "PRIORITY")
-		return  NULL;
+		return  new PriorityScheduler();
 
 	// Custom Scheduler
 	else if (algorithm == "CUSTOM")
-		return NULL;
+		return new CustomScheduler();
 
 	// Invalid Nmme -- Return NULL
 	else 
