@@ -5,13 +5,22 @@
 #include "systemstats.h"
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
+
+// Color Definitions
+#define RST  "\x1B[0m"
+#define RED  "\x1B[31m"
+#define GRN  "\x1B[32m"
+#define YEL  "\x1B[33m"
+#define BLU  "\x1B[34m"
 
 class Logger {
 public:
 	// Constructor
-	Logger(bool verbose, bool per_thread) {
+	Logger(bool verbose, bool per_thread, bool color) {
 		this->verbose = verbose;
 		this->per_thread = per_thread;
+		this->color = color;
 	}
 
 	// If verbose is true, prints a state-transition message
@@ -32,6 +41,9 @@ private:
 
 	// Determines whether or not to print per-process statistics
 	bool per_thread;
+
+	// Print the output with color highlighting
+	bool color;
 };
 
 #endif
