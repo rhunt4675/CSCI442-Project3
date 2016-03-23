@@ -32,9 +32,9 @@ Project 3
 	thread{.h, .cpp} 			-- Defines a thread object, which holds an ID, a pointer to a parent process, and a queue of CPU/IO bursts. Thread objects are responsible for keeping track of their own performance statistics.  
 
 
-3. N/A  
+3. The user can pass an additional flag, (--color or -c) to receive a colorized output of the simulation. This requires a terminal with color support.  
 
-4. 10 hours  
+4. 15 hours  
 
 5.	The custom CPU scheduling algorithm implemented in this project models the Multilevel Feedback Queue Algorithm described in the textbook but offers several improvements over the original version. The custom algorithm natively handles and respects processes with different priorities with an initial seeding algorithm. Higher priority processes are initially placed in higher priority queues, while lower priority processes are initially placed in lower priority queues. This offers a better performance metric for higher priority processes when compared directly with a Multilevel Feedback Queue Algorithm. This algorithm attempts to optimize response and turnaround time for shorter CPU-bound processes and for high priority processes. As a result, the custom algorithm offers the best performance for the short threads out of any of the algorithms implemented in this project.  
 
